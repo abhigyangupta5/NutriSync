@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>NutriSync</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>NutriSync</h1>
+
+    <h2>Personal Nutritionist & Health Analysis System</h2>
+
+    <form method="POST">
+
+        <input type="text"
+               name="name"
+               placeholder="Enter Name"
+               required>
+
+        <input type="number"
+               name="age"
+               placeholder="Enter Age"
+               required>
+
+        <input type="number"
+               step="0.1"
+               name="weight"
+               placeholder="Weight (kg)"
+               required>
+
+        <input type="number"
+               step="0.1"
+               name="height"
+               placeholder="Height (cm)"
+               required>
+
+        <select name="gender" required>
+
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+
+        </select>
+
+        <select name="activity" required>
+
+            <option value="">Activity Level</option>
+            <option value="Low">Low</option>
+            <option value="Moderate">Moderate</option>
+            <option value="High">High</option>
+
+        </select>
+
+        <select name="goal" required>
+
+            <option value="">Fitness Goal</option>
+            <option value="Lose Weight">Lose Weight</option>
+            <option value="Gain Weight">Gain Weight</option>
+            <option value="Maintain Weight">Maintain Weight</option>
+
+        </select>
+
+        <button type="submit">
+            Analyze Health
+        </button>
+
+    </form>
+
+    {% if result %}
+
+<div class="dashboard">
+
+    <div class="cards">
+
+        <div class="card bmi-card">
+            <h3>⚖️ BMI</h3>
+            <p>{{ result.bmi }}</p>
+        </div>
+
+        <div class="card calorie-card">
+            <h3>🔥 Calories</h3>
+            <p>{{ result.calories }}</p>
+        </div>
+
+        <div class="card water-card">
+            <h3>💧 Water</h3>
+            <p>{{ result.water }}L</p>
+        </div>
+
+        <div class="card protein-card">
+            <h3>💪 Protein</h3>
+            <p>{{ result.protein }}g</p>
+        </div>
+
+    </div>
+
+    <div class="report-box">
+
+        <h2>Health Analysis Report</h2>
+
+        <p><strong>Name:</strong> {{ result.name }}</p>
+
+        <p><strong>BMI Category:</strong> {{ result.category }}</p>
+
+        <p><strong>Carbohydrates:</strong> {{ result.carbs }} g</p>
+
+        <p><strong>Fats:</strong> {{ result.fats }} g</p>
+
+        <div class="health-score">
+
+            <h2>Health Score: 78/100</h2>
+
+            <p>Moderately Healthy Lifestyle</p>
+
+        </div>
+
+        <div class="recommendation">
+
+            <h3>AI Recommendation</h3>
+
+            <p>
+                Improve protein intake, maintain proper hydration,
+                and follow a balanced calorie plan according to your goal.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="graphs">
+
+        <img src="{{ url_for('static', filename='graphs/macros.png') }}">
+
+        <img src="{{ url_for('static', filename='graphs/bmi.png') }}">
+
+    </div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
